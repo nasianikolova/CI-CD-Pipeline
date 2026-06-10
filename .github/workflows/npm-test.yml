@@ -14,3 +14,11 @@ jobs:
           node-version: '18'
       - run: npm install
       - run: npm run build --if-present
+
+      # This is the exact step that proves GitHub Actions deployed it
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
